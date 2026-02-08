@@ -1,7 +1,7 @@
 
 ## 🧠 Event Volunteer Management System
 
-The ** Event Volunteer Management System** is a browser-based web application designed to simplify event organization and volunteer coordination. It provides a centralized platform where event organizers can create events, assign tasks, and monitor volunteer participation, while volunteers can register, explore upcoming events, and sign up for roles based on their interests and availability.
+The **Event Volunteer Management System** is a browser-based web application designed to simplify event organization and volunteer coordination. It provides a centralized platform where event organizers can create events, assign tasks, and monitor volunteer participation, while volunteers can register, explore upcoming events, and sign up for roles based on their interests and availability.
 
 By digitizing the entire volunteer management workflow, the system ensures secure access, efficient coordination, and real-time updates—making event execution smoother, more organized, and less error-prone.
 
