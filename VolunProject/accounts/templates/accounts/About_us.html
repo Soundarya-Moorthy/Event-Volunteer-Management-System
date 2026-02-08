@@ -1,0 +1,52 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About Us | Togetherly Volunteers</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Segoe UI', sans-serif;
+            background-color: #f0f4f8;
+            margin: 0;
+            padding: 0;
+        }
+        html {
+            scroll-padding-top: 5rem;
+        }
+    </style>
+</head>
+<body class="bg-gray-100 smooth-scroll">
+
+    <!-- Header -->
+    {% include 'accounts/includes/header.html' %}
+
+    <!-- About Us Section -->
+    <section id="about" class="py-20 bg-white">
+        <div class="container mx-auto px-6">
+            <h2 class="text-4xl font-bold text-center text-blue-800 mb-10">
+                Our Mission: The Togetherly Movement with compassion, coordination, and community spirit.
+            </h2>
+            <div class="flex flex-col md:flex-row items-center">
+                <div class="md:w-1/2 mb-6 md:mb-0">
+                    <img src="{% static 'accounts/images/teamCollab.jpg' %}" alt="Team Collaboration" class="rounded-lg shadow-lg">
+                </div>
+                <div class="md:w-1/2 md:pl-10">
+                    <p class="text-lg text-gray-700 leading-relaxed">
+                        Togetherly Volunteers is a platform where meaningful events meet motivated people. We connect NGOs, colleges, community groups, and corporate teams with volunteers who bring energy, empathy, and excellence to every moment. Whether you're organizing a cultural fest, a civic drive, or a social impact initiative, Togetherly simplifies volunteer management and boosts engagement.
+                        <br><br>
+                        Volunteers can discover events and contribute their skills. General users can explore causes and join when inspired. From backstage support to frontline action, every role matters. Join hands. Spark change.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    {% include 'accounts/includes/footer.html' %}
+
+</body>
+</html>

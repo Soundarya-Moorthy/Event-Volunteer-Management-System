@@ -1,0 +1,139 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Event List | Togetherly Volunteers</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Segoe UI', sans-serif;
+            background-color: #f0f4f8;
+            margin: 0;
+            padding: 0;
+        }
+        html {
+            scroll-padding-top: 5rem;
+        }
+        
+    .events-wrapper {
+      padding: 60px 20px;
+      max-width: 1200px;
+      margin: auto;
+    }
+
+    .events-title {
+      text-align: center;
+      font-size: 2.5rem;
+      color: #1e3a8a;
+      margin-bottom: 40px;
+    }
+
+    .events-scroll {
+      display: flex;
+      overflow-x: auto;
+      gap: 20px;
+      padding-bottom: 20px;
+      scroll-snap-type: x mandatory;
+      max-width: 960px;
+      margin: auto;
+    }
+    .event-card {
+      flex: 0 0 auto;
+      scroll-snap-align: start;
+      background-color: #fff;
+      border-radius: 10px;
+      box-shadow: 0 6px 12px rgba(0,0,0,0.1);
+      width: 300px;
+      padding: 20px;
+      text-align: center;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      opacity: 0;
+      transform: translateY(30px);
+      animation: fadeInUp 0.8s ease forwards;
+      animation-delay: calc(0.2s * var(--i));
+    }
+
+    .event-card:hover {
+      transform: scale(1.05);
+      box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+    }
+
+    .event-card img {
+      width: 100%;
+      height: 180px;
+      object-fit: cover;
+      border-radius: 8px;
+      margin-bottom: 15px;
+    }
+
+    .event-card h3 {
+      font-size: 1.25rem;
+      color: #333;
+      margin-bottom: 10px;
+    }
+
+    .event-card p {
+      font-size: 0.95rem;
+      color: #555;
+    }
+
+    .view-link {
+      display: block;
+      text-align: center;
+      margin-top: 40px;
+      font-size: 1rem;
+      color: #2563eb;
+      text-decoration: none;
+    }
+
+    .view-link:hover {
+      text-decoration: underline;
+    }
+
+    @keyframes fadeInUp {
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    /* Optional: Hide scrollbar */
+    .events-scroll::-webkit-scrollbar {
+      display: none;
+    }
+    .events-scroll {
+      -ms-overflow-style: none;
+      scrollbar-width: none;
+    }
+    </style>
+</head>
+<body class="bg-gray-100 smooth-scroll">
+
+<!-- Header -->
+  {% include 'accounts/includes/header.html' %}
+ 
+<!-- Event Highlights Section -->
+<section id="events" class="events-wrapper">
+  <h2 class="events-title">Upcoming Events</h2>
+  <div class="events-scroll">
+    {% for event in events %}
+      <div class="event-card">
+        <img src="{{ event.image.url }}" alt="{{ event.title }}">
+        <h3>{{ event.title }}</h3>
+        <p>{{ event.description }}</p>
+      </div>
+    {% empty %}
+      <p>No upcoming events at the moment.</p>
+    {% endfor %}
+  </div>
+  <a class="view-link" href="{% url 'event_list' %}">View Full Event Details</a>
+</section>
+
+<!-- Footer -->
+    {% include 'accounts/includes/footer.html' %}
+
+</body>
+</html>

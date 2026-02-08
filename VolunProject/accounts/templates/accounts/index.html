@@ -1,0 +1,224 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Togetherly Volunteers</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+<style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background-color: #f0f4f8;
+      margin: 0;
+      padding: 0;
+    }
+
+    .events-wrapper {
+      padding: 60px 20px;
+      max-width: 1200px;
+      margin: auto;
+    }
+
+    .events-title {
+      text-align: center;
+      font-size: 2.5rem;
+      color: #1e3a8a;
+      margin-bottom: 40px;
+    }
+
+    .events-scroll {
+      display: flex;
+      overflow-x: auto;
+      gap: 20px;
+      padding-bottom: 20px;
+      scroll-snap-type: x mandatory;
+      max-width: 960px;
+      margin: auto;
+    }
+    .event-card {
+      flex: 0 0 auto;
+      scroll-snap-align: start;
+      background-color: #fff;
+      border-radius: 10px;
+      box-shadow: 0 6px 12px rgba(0,0,0,0.1);
+      width: 300px;
+      padding: 20px;
+      text-align: center;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      opacity: 0;
+      transform: translateY(30px);
+      animation: fadeInUp 0.8s ease forwards;
+      animation-delay: calc(0.2s * var(--i));
+    }
+
+    .event-card:hover {
+      transform: scale(1.05);
+      box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+    }
+
+    .event-card img {
+      width: 100%;
+      height: 180px;
+      object-fit: cover;
+      border-radius: 8px;
+      margin-bottom: 15px;
+    }
+
+    .event-card h3 {
+      font-size: 1.25rem;
+      color: #333;
+      margin-bottom: 10px;
+    }
+
+    .event-card p {
+      font-size: 0.95rem;
+      color: #555;
+    }
+
+    .view-link {
+      display: block;
+      text-align: center;
+      margin-top: 40px;
+      font-size: 1rem;
+      color: #2563eb;
+      text-decoration: none;
+    }
+
+    .view-link:hover {
+      text-decoration: underline;
+    }
+
+    @keyframes fadeInUp {
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+    /* Optional: Hide scrollbar */
+    .events-scroll::-webkit-scrollbar {
+      display: none;
+    }
+    .events-scroll {
+      -ms-overflow-style: none;
+      scrollbar-width: none;
+    }
+
+    html {
+     scroll-padding-top: 5rem; /* Adjust based on your header height */
+     }
+
+  </style>
+</head>
+<body class="bg-gray-100 smooth-scroll">
+
+<!-- Header -->
+<header class="bg-blue-800 text-white sticky top-0 z-50 shadow-lg">
+    <nav class="container mx-auto px-6 py-4 flex justify-between items-center">
+        <div class="text-2xl font-bold">Togetherly Volunteers</div>
+        <div class="flex items-center space-x-6">
+            <ul class="flex space-x-6">
+                <li><a href="{% url 'index' %}" class="hover:text-blue-300 transition">Home</a></li>
+                <li><a href="{% url 'about_us' %}" class="hover:text-blue-300 transition">About Us</a></li>
+                <li><a href="{% url 'event_highlights' %}" class="hover:text-blue-300 transition">Event List</a></li>
+                <li><a href="{% url 'volunteer_section' %}" class="hover:text-blue-300 transition">Volunteer</a></li>
+                <li><a href="{% url 'past_event' %}" class="hover:text-blue-300 transition">Past Event Highlights</a></li>
+                <li><a href="{% url 'contact_us' %}" class="hover:text-blue-300 transition">Contact Us</a></li>
+            </ul>
+            <a href="/login" class="bg-green-500 hover:bg-green-600 text-white font-semibold py-2 px-4 rounded transition duration-300">
+                Sign In
+            </a>
+        </div>
+    </nav>
+</header>
+<!-- Featured Events Carousel -->
+<section class="relative bg-white py-16 overflow-hidden">
+  <div class="max-w-7xl mx-auto px-8">
+    <div id="eventCarousel" class="relative w-full h-96 rounded-lg overflow-hidden shadow-lg">
+      {% for event in featured_events %}
+      <div class="carousel-slide absolute inset-0 transition-opacity duration-1000 ease-in-out opacity-0 {% if forloop.first %}opacity-100{% endif %}">
+        <img src="{{ event.image.url }}" alt="{{ event.title }}" class="w-full h-full object-cover">
+        <div class="absolute inset-0 bg-black bg-opacity-40 flex flex-col justify-center items-center text-white text-center px-4">
+          <h3 class="text-3xl font-bold mb-2">{{ event.title }}</h3>
+          <p class="text-base">{{ event.description }}</p>
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+<!-- Hero Section -->
+<section id="home" class="parallax h-96 md:h-[32rem] flex items-center justify-center text-center text-white bg-cover bg-center" style="background-image: url('https://images.unsplash.com/photo-1501386760812-e1ff8a2a86f0?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80')">
+  <div class="bg-blue-800 p-10 rounded-lg max-w-7xl mx-auto px-8">
+    <h1 class="text-5xl font-bold mb-4 text-white">Welcome to Togetherly Volunteers</h1>
+    <h2 class="text-5xl font-bold mb-4 text-white">Be the spark behind the scenes</h2>
+    <p class="text-xl mb-6 text-blue-100">We believe every great event is powered by passionate people. Our volunteers are the heartbeat of our mission—bringing energy, empathy and excellence for every moment.</p>
+    <a href="{% url 'volunteer_section' %}" class="bg-white text-blue-700 font-semibold px-6 py-3 rounded-full hover:bg-blue-100 transition">Become a Volunteer</a>
+  </div>
+</section>
+
+
+<!-- Testimonials Section -->
+    <section id="testimonials" class="py-20 bg-white">
+        <div class="container mx-auto px-6">
+            <h2 class="text-4xl font-bold text-center text-blue-800 mb-10">What Our Volunteers Say</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div class="bg-gray-100 p-6 rounded-lg shadow-lg text-center">
+                    <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-4.0.3&auto=format&fit=crop&w=200&q=80" alt="Volunteer 1" class="w-24 h-24 rounded-full mx-auto mb-4">
+                    <p class="text-gray-700 italic">"Helping organize the science fair taught me more than any textbook"</p>
+                    <p class="mt-4 font-semibold">Johnson.V, Volunteer</p>
+                </div>
+                <div class="bg-gray-100 p-6 rounded-lg shadow-lg text-center">
+                    <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?ixlib=rb-4.0.3&auto=format&fit=crop&w=200&q=80" alt="Volunteer 2" class="w-24 h-24 rounded-full mx-auto mb-4">
+                    <p class="text-gray-700 italic">"Volunteering with the NGO's Health Camp opened my eyes to the real needs of our community"</p>
+                    <p class="mt-4 font-semibold">Meena D., Outreach Volunteer</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+<!-- Footer -->
+    <footer class="bg-blue-800 text-white py-6">
+        <div class="container mx-auto px-6 text-center">
+            <p>&copy; 2025 Togetherly Volunteers. All rights reserved.</p>
+            <div class="mt-4">
+                <a href="#" class="text-blue-300 hover:text-blue-100 mx-2">Privacy Policy</a>
+                <a href="#" class="text-blue-300 hover:text-blue-100 mx-2">Terms of Service</a>
+            </div>
+        </div>
+    </footer>
+    <script>
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+
+        // Toggle visibility of volunteer experience details
+        function toggleExperienceDetails() {
+            const yesRadio = document.querySelector('input[name="volunteer-experience"][value="yes"]');
+            const detailsField = document.getElementById('volunteer-experience-details');
+            detailsField.style.display = yesRadio.checked ? 'block' : 'none';
+        }
+  let currentSlide = 0;
+  const slides = document.querySelectorAll('.carousel-slide');
+
+  function showSlide(index) {
+    slides.forEach((slide, i) => {
+      slide.style.opacity = i === index ? '1' : '0';
+    });
+  }
+
+  setInterval(() => {
+    currentSlide = (currentSlide + 1) % slides.length;
+    showSlide(currentSlide);
+  }, 4000); // Change every 4 seconds
+</script>
+</body>
+</html>
